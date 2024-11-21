@@ -14,22 +14,12 @@ def txt_to_excel(input_txt_file, output_excel_file):
     # 创建 DataFrame
     df = pd.DataFrame(data, columns=['X', 'Y', 'θ'])
     
-    # 尝试将每列数据转换为数字类型
-    try:
-        df['X'] = pd.to_numeric(df['X'], errors='coerce')  # 转换为数字，无法转换的设置为 NaN
-        df['Y'] = pd.to_numeric(df['Y'], errors='coerce')  # 转换为数字
-        df['θ'] = pd.to_numeric(df['θ'], errors='coerce')  # 转换为数字
-    except Exception as e:
-        print(f"数据转换发生错误: {e}")
-
     # 添加序号列
     df.insert(0, '序号', range(1, len(df) + 1))
 
     # 输出到 Excel 文件
     df.to_excel(output_excel_file, index=False)
     print(f"数据已成功输出到 {output_excel_file}")
-
-
 
 # 使用示例
 if __name__ == "__main__":
