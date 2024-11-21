@@ -30,7 +30,6 @@ def txt_to_excel(input_txt_file, output_excel_file):
     print(f"数据已成功输出到 {output_excel_file}")
 
 
-
 # 使用示例
 if __name__ == "__main__":
     input_txt_file = r'D:\onedrive\应用\GitHub\ConvertTxt2Excel\input.txt'      # 输入的 TXT 文件名
