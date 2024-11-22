@@ -8,6 +8,8 @@ def txt_to_excel(input_txt_file, output_excel_file):
         for line in file:
             # 分割每一行数据
             parts = line.strip().split(';')
+            # 去除分割后的空字符串，并确保有三组有效数据
+            parts = [part for part in parts if part]  # 过滤空字符串
             if len(parts) == 3:  # 确保每行有三组数据
                 data.append(parts)
 
