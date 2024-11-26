@@ -43,18 +43,14 @@ yline(-0.02, 'k-.', 'θ=-0.02', 'LabelHorizontalAlignment', 'right');
 title('测试偏差量');
 xlabel('样本序号');
 ylabel('偏差量');
-
-% 步骤 4：显示偏差量的图例
-legend({'x的偏差量', 'y的偏差量', 'θ的偏差量'}, 'Location', 'southeast');
-
-% 创建一个新的图例框，用于3 sigma值
-legendString = {['x_{sigma} = ', num2str(x_sigma, '%.4f')], ...
-                ['y_{sigma} = ', num2str(y_sigma, '%.4f')], ...
-                ['θ_{sigma} = ', num2str(theta_sigma, '%.4f')]};
-
-% 显示3 sigma值的图例框
-hLegend2 = legend(legendString, 'Location', 'northeast'); % 右上角
-set(hLegend2, 'Box', 'on'); % 加一个边框
-
+legend;
 grid on;
+
+% 步骤 4：显示3 sigma值
+text('Units', 'normalized', 'Position', [0.8, 0.1], ...
+     'String', {['x_{sigma} = ', num2str(x_sigma)], ...
+                ['y_{sigma} = ', num2str(y_sigma)], ...
+                ['θ_{sigma} = ', num2str(theta_sigma)]}, ...
+     'FontSize', 10, 'BackgroundColor', 'w');
+
 hold off;
