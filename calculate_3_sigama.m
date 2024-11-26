@@ -1,8 +1,8 @@
 % 步骤 1：弹出文件选择对话框
 [file, path] = uigetfile('*.xlsx', '请选择Excel数据文件');
 if isequal(file, 0)
-    disp('用户取消选择文件');
-    return; % 如果用户取消选择，退出程序
+disp('用户取消选择文件');
+return; % 如果用户取消选择，退出程序
 end
 fullFileName = fullfile(path, file);
 
@@ -48,9 +48,9 @@ grid on;
 
 % 步骤 4：显示3 sigma值
 text('Units', 'normalized', 'Position', [0.8, 0.1], ...
-     'String', {['x_{sigma} = ', num2str(x_sigma)], ...
-                ['y_{sigma} = ', num2str(y_sigma)], ...
-                ['θ_{sigma} = ', num2str(theta_sigma)]}, ...
-     'FontSize', 10, 'BackgroundColor', 'w');
+'String', {['x_{sigma} = ', num2str(x_sigma)], ...
+['y_{sigma} = ', num2str(y_sigma)], ...
+['θ_{sigma} = ', num2str(theta_sigma)]}, ...
+'FontSize', 10, 'BackgroundColor', 'w');
 
 hold off;
