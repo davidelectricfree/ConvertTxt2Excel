@@ -1,5 +1,13 @@
-% 步骤 1：导入数据
-data = readtable('D:\onedrive\应用\GitHub\ConvertTxt2Excel\output.xlsx');
+% 步骤 1：弹出文件选择对话框
+[file, path] = uigetfile('*.xlsx', '请选择Excel数据文件');
+if isequal(file, 0)
+    disp('用户取消选择文件');
+    return; % 如果用户取消选择，退出程序
+end
+fullFileName = fullfile(path, file);
+
+% 从选定的Excel文件中导入数据
+data = readtable(fullFileName);
 
 % 假设数据的列分别为：
 % 第1列：序号
