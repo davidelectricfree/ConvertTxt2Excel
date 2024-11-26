@@ -43,22 +43,18 @@ yline(-0.02, 'k-.', 'θ=-0.02', 'LabelHorizontalAlignment', 'right');
 title('测试偏差量');
 xlabel('样本序号');
 ylabel('偏差量');
-legend;
+
+% 步骤 4：显示偏差量的图例
+legend({'x的偏差量', 'y的偏差量', 'θ的偏差量'}, 'Location', 'southeast');
+
+% 创建一个新的图例框，用于3 sigma值
+legendString = {['x_{sigma} = ', num2str(x_sigma, '%.4f')], ...
+                ['y_{sigma} = ', num2str(y_sigma, '%.4f')], ...
+                ['θ_{sigma} = ', num2str(theta_sigma, '%.4f')]};
+
+% 显示3 sigma值的图例框
+hLegend2 = legend(legendString, 'Location', 'northeast'); % 右上角
+set(hLegend2, 'Box', 'on'); % 加一个边框
+
 grid on;
-
-% 步骤 4：显示可拖动的3 sigma信息文本
-% 创建格式化字符串
-textStr = {['x_{sigma} = ', num2str(x_sigma)], ...
-           ['y_{sigma} = ', num2str(y_sigma)], ...
-           ['θ_{sigma} = ', num2str(theta_sigma)]};
-
-% 添加可拖动的文本注释
-hAnnotation = annotation('textbox', [0.8, 0.1, 0.15, 0.1], ...
-                         'String', textStr, ...
-                         'FontSize', 10, ...
-                         'BackgroundColor', 'w', ...
-                         'EdgeColor', 'k', ...
-                         'FitBoxToText', 'on', ...
-                         'Movable', 'on'); % 这个选项允许文本框移动
-
 hold off;
