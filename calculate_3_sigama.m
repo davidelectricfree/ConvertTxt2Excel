@@ -1,8 +1,8 @@
 % 步骤 1：弹出文件选择对话框
 [file, path] = uigetfile('*.xlsx', '请选择Excel数据文件');
 if isequal(file, 0)
-disp('用户取消选择文件');
-return; % 如果用户取消选择，退出程序
+    disp('用户取消选择文件');
+    return; % 如果用户取消选择，退出程序
 end
 fullFileName = fullfile(path, file);
 
@@ -48,9 +48,29 @@ grid on;
 
 % 步骤 4：显示3 sigma值
 text('Units', 'normalized', 'Position', [0.8, 0.1], ...
-'String', {['x_{sigma} = ', num2str(x_sigma)], ...
-['y_{sigma} = ', num2str(y_sigma)], ...
-['θ_{sigma} = ', num2str(theta_sigma)]}, ...
-'FontSize', 10, 'BackgroundColor', 'w');
+    'String', {['x_{sigma} = ', num2str(x_sigma)], ...
+    ['y_{sigma} = ', num2str(y_sigma)], ...
+    ['θ_{sigma} = ', num2str(theta_sigma)]}, ...
+    'FontSize', 10, 'BackgroundColor', 'w');
 
+hold off;
+
+% 步骤 5：绘制直方图
+figure;
+
+% 设置直方图的边界
+edges = -0.3:0.05:0.3;
+
+% 绘制每个直方图
+hold on;
+histogram(x_data, edges, 'FaceColor', 'r', 'DisplayName', 'x的偏差量', 'EdgeColor', 'k', 'Normalization', 'probability');
+histogram(y_data, edges, 'FaceColor', 'g', 'DisplayName', 'y的偏差量', 'EdgeColor', 'k', 'Normalization', 'probability');
+histogram(theta_data, edges, 'FaceColor', 'b', 'DisplayName', 'θ的偏差量', 'EdgeColor', 'k', 'Normalization', 'probability');
+
+% 设置图形属性
+title('偏差量的直方图');
+xlabel('偏差量');
+ylabel('概率');
+legend;
+grid on;
 hold off;
