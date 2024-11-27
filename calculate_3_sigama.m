@@ -6,8 +6,8 @@ if isequal(file, 0)
 end
 fullFileName = fullfile(path, file);
 
-% 从选定的Excel文件中导入数据
-data = readtable(fullFileName);
+% 从选定的Excel文件中导入数据，设置VariableNamingRule为preserve
+data = readtable(fullFileName, 'VariableNamingRule', 'preserve');
 
 % 假设数据的列分别为：
 % 第1列：序号
