@@ -29,12 +29,24 @@ plot(theta_data, 'b', 'DisplayName', 'θ的偏差量');
 % 计算数据组数
 total_data_points = length(x_data); % 假设x、y、θ的数据组数相同
 
+% 计算3 sigma值
+x_sigma = 3 * std(x_data);
+y_sigma = 3 * std(y_data);
+theta_sigma = 3 * std(theta_data);
+
 % 设置图形属性
 title('测试偏差量');
 xlabel('样本序号');
 ylabel('偏差量');
 legend;
 grid on;
+
+% 在图中添加统计信息
+text('Units', 'normalized', 'Position', [0.8, 0.1], ...
+    'String', {['x_{sigma} = ', num2str(x_sigma)], ...
+    ['y_{sigma} = ', num2str(y_sigma)], ...
+    ['θ_{sigma} = ', num2str(theta_sigma)]}, ...
+    'FontSize', 10, 'BackgroundColor', 'w');
 
 % 在图中添加总数据组数信息
 text('Units', 'normalized', 'Position', [0.8, 0.2], ...
@@ -58,7 +70,7 @@ grid on;
 % 添加计数标注
 xCenters = (xEdges(1:end-1) + xEdges(2:end)) / 2; % 计算每个直方条形的中心
 for i = 1:length(hX)
-    text(xCenters(i), hX(i), num2str(hX(i)*total_data_points, '%.1f'), ...
+    text(xCenters(i), hX(i), num2str(hX(i) * total_data_points, '%.1f'), ...
         'VerticalAlignment', 'bottom', 'HorizontalAlignment', 'center', 'Color', 'k');
 end
 
@@ -74,7 +86,7 @@ grid on;
 % 添加计数标注
 yCenters = (yEdges(1:end-1) + yEdges(2:end)) / 2; % 计算每个直方条形的中心
 for i = 1:length(hY)
-    text(yCenters(i), hY(i), num2str(hY(i)*total_data_points, '%.1f'), ...
+    text(yCenters(i), hY(i), num2str(hY(i) * total_data_points, '%.1f'), ...
         'VerticalAlignment', 'bottom', 'HorizontalAlignment', 'center', 'Color', 'k');
 end
 
@@ -90,6 +102,6 @@ grid on;
 % 添加计数标注
 thetaCenters = (thetaEdges(1:end-1) + thetaEdges(2:end)) / 2; % 计算每个直方条形的中心
 for i = 1:length(hTheta)
-    text(thetaCenters(i), hTheta(i), num2str(hTheta(i)*total_data_points, '%.1f'), ...
+    text(thetaCenters(i), hTheta(i), num2str(hTheta(i) * total_data_points, '%.1f'), ...
         'VerticalAlignment', 'bottom', 'HorizontalAlignment', 'center', 'Color', 'k');
 end
