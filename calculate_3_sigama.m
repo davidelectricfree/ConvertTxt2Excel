@@ -55,22 +55,29 @@ text('Units', 'normalized', 'Position', [0.8, 0.1], ...
 
 hold off;
 
-% 步骤 5：绘制直方图
+% 步骤 5：绘制 x、y 和 θ 的直方图，各自放在不同图中
+edges = -0.3:0.05:0.3; % 直方图的边界
+
+% 绘制 x 的直方图
 figure;
-
-% 设置直方图的边界
-edges = -0.3:0.05:0.3;
-
-% 绘制每个直方图
-hold on;
-histogram(x_data, edges, 'FaceColor', 'r', 'DisplayName', 'x的偏差量', 'EdgeColor', 'k', 'Normalization', 'probability');
-histogram(y_data, edges, 'FaceColor', 'g', 'DisplayName', 'y的偏差量', 'EdgeColor', 'k', 'Normalization', 'probability');
-histogram(theta_data, edges, 'FaceColor', 'b', 'DisplayName', 'θ的偏差量', 'EdgeColor', 'k', 'Normalization', 'probability');
-
-% 设置图形属性
-title('偏差量的直方图');
+histogram(x_data, edges, 'FaceColor', 'r', 'EdgeColor', 'k', 'Normalization', 'probability');
+title('x的偏差量直方图');
 xlabel('偏差量');
 ylabel('概率');
-legend;
 grid on;
-hold off;
+
+% 绘制 y 的直方图
+figure;
+histogram(y_data, edges, 'FaceColor', 'g', 'EdgeColor', 'k', 'Normalization', 'probability');
+title('y的偏差量直方图');
+xlabel('偏差量');
+ylabel('概率');
+grid on;
+
+% 绘制 θ 的直方图
+figure;
+histogram(theta_data, edges, 'FaceColor', 'b', 'EdgeColor', 'k', 'Normalization', 'probability');
+title('θ的偏差量直方图');
+xlabel('偏差量');
+ylabel('概率');
+grid on;
