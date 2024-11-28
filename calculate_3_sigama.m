@@ -41,13 +41,6 @@ ylabel('偏差量');
 legend;
 grid on;
 
-% 在图中添加统计信息
-text('Units', 'normalized', 'Position', [0.8, 0.1], ...
-    'String', {['x_{sigma} = ', num2str(x_sigma)], ...
-    ['y_{sigma} = ', num2str(y_sigma)], ...
-    ['θ_{sigma} = ', num2str(theta_sigma)]}, ...
-    'FontSize', 10, 'BackgroundColor', 'w');
-
 % 在图中添加总数据组数信息
 text('Units', 'normalized', 'Position', [0.8, 0.2], ...
     'String', {['总数据组数 = ', num2str(total_data_points)]}, ...
@@ -67,12 +60,20 @@ xlabel('偏差量');
 ylabel('概率');
 grid on;
 
-% 添加计数标注
+% 添加计数标注（仅当计数大于0时）
 xCenters = (xEdges(1:end-1) + xEdges(2:end)) / 2; % 计算每个直方条形的中心
 for i = 1:length(hX)
-    text(xCenters(i), hX(i), num2str(hX(i) * total_data_points, '%.1f'), ...
-        'VerticalAlignment', 'bottom', 'HorizontalAlignment', 'center', 'Color', 'k');
+    if hX(i) > 0
+        text(xCenters(i), hX(i), num2str(hX(i) * total_data_points, '%.1f'), ...
+            'VerticalAlignment', 'bottom', 'HorizontalAlignment', 'center', 'Color', 'k');
+    end
 end
+
+% 添加总数据量和3σ数据的标注
+text('Units', 'normalized', 'Position', [0.8, 0.8], ...
+    'String', {['总数据组数 = ', num2str(total_data_points)], ...
+    ['x_{sigma} = ', num2str(x_sigma)]}, ...
+    'FontSize', 10, 'BackgroundColor', 'w');
 
 % 绘制 y 的直方图
 figure;
@@ -83,25 +84,42 @@ xlabel('偏差量');
 ylabel('概率');
 grid on;
 
-% 添加计数标注
+% 添加计数标注（仅当计数大于0时）
 yCenters = (yEdges(1:end-1) + yEdges(2:end)) / 2; % 计算每个直方条形的中心
 for i = 1:length(hY)
-    text(yCenters(i), hY(i), num2str(hY(i) * total_data_points, '%.1f'), ...
-        'VerticalAlignment', 'bottom', 'HorizontalAlignment', 'center', 'Color', 'k');
+    if hY(i) > 0
+        text(yCenters(i), hY(i), num2str(hY(i) * total_data_points, '%.1f'), ...
+            'VerticalAlignment', 'bottom', 'HorizontalAlignment', 'center', 'Color', 'k');
+    end
 end
 
-% 绘制 θ 的直方图
+% 添加总数据量和3σ数据的标注
+text('Units', 'normalized', 'Position', [0.8, 0.8], ...
+    'String', {['总数据组数 = ', num2str(total_data_points)], ...
+    ['y_{sigma} = ', num2str(y_sigma)]}, ...
+    'FontSize', 10, 'BackgroundColor', 'w');
+
+% 绘制 θ 的直方图（更新边界为±0.02）
+edges_theta = -0.02:0.005:0.02; % θ的直方图边界
 figure;
-[hTheta, thetaEdges] = histcounts(theta_data, edges, 'Normalization', 'probability');
-histogram(theta_data, edges, 'FaceColor', 'b', 'EdgeColor', 'k', 'Normalization', 'probability');
+[hTheta, thetaEdges] = histcounts(theta_data, edges_theta, 'Normalization', 'probability');
+histogram(theta_data, edges_theta, 'FaceColor', 'b', 'EdgeColor', 'k', 'Normalization', 'probability');
 title('θ的偏差量直方图');
 xlabel('偏差量');
 ylabel('概率');
 grid on;
 
-% 添加计数标注
+% 添加计数标注（仅当计数大于0时）
 thetaCenters = (thetaEdges(1:end-1) + thetaEdges(2:end)) / 2; % 计算每个直方条形的中心
 for i = 1:length(hTheta)
-    text(thetaCenters(i), hTheta(i), num2str(hTheta(i) * total_data_points, '%.1f'), ...
-        'VerticalAlignment', 'bottom', 'HorizontalAlignment', 'center', 'Color', 'k');
+    if hTheta(i) > 0
+        text(thetaCenters(i), hTheta(i), num2str(hTheta(i) * total_data_points, '%.1f'), ...
+            'VerticalAlignment', 'bottom', 'HorizontalAlignment', 'center', 'Color', 'k');
+    end
 end
+
+% 添加总数据量和3σ数据的标注
+text('Units', 'normalized', 'Position', [0.8, 0.8], ...
+    'String', {['总数据组数 = ', num2str(total_data_points)], ...
+    ['θ_{sigma} = ', num2str(theta_sigma)]}, ...
+    'FontSize', 10, 'BackgroundColor', 'w');
