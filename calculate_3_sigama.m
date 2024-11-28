@@ -41,6 +41,14 @@ ylabel('偏差量');
 legend;
 grid on;
 
+% 添加基准线
+yline(0.1, 'k--', 'x=0.1', 'LabelHorizontalAlignment', 'left', 'DisplayName', 'x阈值=0.1');
+yline(-0.1, 'k--', 'x=-0.1', 'LabelHorizontalAlignment', 'left', 'DisplayName', 'x阈值=-0.1');
+yline(0.1, 'k:', 'y=0.1', 'LabelHorizontalAlignment', 'right', 'DisplayName', 'y阈值=0.1');
+yline(-0.1, 'k:', 'y=-0.1', 'LabelHorizontalAlignment', 'right', 'DisplayName', 'y阈值=-0.1');
+yline(0.02, 'k-.', 'θ=0.02', 'LabelHorizontalAlignment', 'right', 'DisplayName', 'θ阈值=0.02');
+yline(-0.02, 'k-.', 'θ=-0.02', 'LabelHorizontalAlignment', 'right', 'DisplayName', 'θ阈值=-0.02');
+
 % 在图中添加总数据组数信息
 text('Units', 'normalized', 'Position', [0.8, 0.2], ...
     'String', {['总数据组数 = ', num2str(total_data_points)]}, ...
